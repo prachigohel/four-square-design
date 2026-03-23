@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans antialiased transition-colors duration-300;
+    color: #1f2937; /* slate-800 */
+    background-color: #f9f6f1; /* fawn-50 */
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight transition-all duration-300;
+    color: #0f172a; /* slate-900 */
+  }
+
+  /* Robust Dark Mode Overrides */
+  .dark body {
+    color: #f8fafc !important;
+    background-color: #020617 !important;
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: #ffffff !important;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-lg border border-white/20 dark:border-slate-700/50 shadow-sm;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-3d {
+    transform-style: preserve-3d;
+  }
+}
