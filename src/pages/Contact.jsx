@@ -49,8 +49,7 @@ const Contact = () => {
     }
   };
 
-  const WHATSAPP_NUMBER = "917600134301";
-  const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hello Four Square Designs, I'm interested in a consultation.")}`;
+
 
       return (
         <div className="py-20 lg:py-32 bg-white dark:bg-slate-900 min-h-screen transition-colors duration-300">
@@ -111,22 +110,7 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div className="bg-slate-50 dark:bg-slate-900 p-8 rounded-3xl border border-slate-100 dark:border-slate-800 flex flex-col md:flex-row items-center gap-6 justify-between">
-                  <div>
-                    <h4 className="text-lg font-display font-bold text-slate-800 dark:text-white flex items-center gap-2 mb-1">
-                      <Phone size={18} className="text-amber-500" /> WhatsApp Direct
-                    </h4>
-                    <p className="text-slate-600 dark:text-slate-400 font-medium">+91 7600134301</p>
-                  </div>
-              <a 
-                href={WHATSAPP_URL} 
-                target="_blank" 
-                rel="noreferrer"
-                className="bgLight flex items-center gap-2 bg-[#25D366] text-white px-6 py-3 rounded-full font-medium hover:bg-[#1ebd5a] transition-colors shadow-lg shadow-[#25D366]/20 whitespace-nowrap"
-              >
-                <MessageCircle size={20} /> Message Us
-              </a>
-            </div>
+
           </motion.div>
 
               {/* Contact Form */}
