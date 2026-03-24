@@ -128,7 +128,7 @@ const ProjectRequest = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/api/project-request', {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/project-request`, {
         method: 'POST',
         body: data,
       });
