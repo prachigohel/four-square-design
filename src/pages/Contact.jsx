@@ -8,9 +8,22 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const errors = {};
+    if (!formData.name.trim()) errors.name = 'This field is required';
+    if (!formData.email.trim()) errors.email = 'This field is required';
+    if (!formData.message.trim()) errors.message = 'This field is required';
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+    
+    setValidationErrors({});
     setIsSubmitting(true);
     setError(null);
 
@@ -145,34 +158,43 @@ const Contact = () => {
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Name</label>
                     <input 
                       type="text" 
-                      required
                       value={formData.name}
-                      onChange={e => setFormData({...formData, name: e.target.value})}
+                      onChange={e => {
+                        setFormData({...formData, name: e.target.value});
+                        if (validationErrors.name) setValidationErrors({...validationErrors, name: null});
+                      }}
                       className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:bg-white dark:focus:bg-slate-800 dark:text-white transition-all" 
                       placeholder="Your Name" 
                     />
+                    {validationErrors.name && <p className="text-red-500 text-xs mt-1">{validationErrors.name}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Email</label>
                     <input 
                       type="email" 
-                      required
                       value={formData.email}
-                      onChange={e => setFormData({...formData, email: e.target.value})}
+                      onChange={e => {
+                        setFormData({...formData, email: e.target.value});
+                        if (validationErrors.email) setValidationErrors({...validationErrors, email: null});
+                      }}
                       className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:bg-white dark:focus:bg-slate-800 dark:text-white transition-all" 
                       placeholder="your@email.com" 
                     />
+                    {validationErrors.email && <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Message</label>
                     <textarea 
-                      required
                       rows={5}
                       value={formData.message}
-                      onChange={e => setFormData({...formData, message: e.target.value})}
+                      onChange={e => {
+                        setFormData({...formData, message: e.target.value});
+                        if (validationErrors.message) setValidationErrors({...validationErrors, message: null});
+                      }}
                       className="w-full px-4 py-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:bg-white dark:focus:bg-slate-800 dark:text-white transition-all resize-none" 
                       placeholder="How can we help with your design?" 
                     ></textarea>
+                    {validationErrors.message && <p className="text-red-500 text-xs mt-1">{validationErrors.message}</p>}
                   </div>
                   {error && (
                     <p className="text-red-500 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-100 dark:border-red-900/30">

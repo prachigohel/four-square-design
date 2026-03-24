@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  const [email, setEmail] = useState('');
+  const [error, setError] = useState(null);
+
+  const handleSubscribe = () => {
+    if (!email.trim()) {
+      setError('This field is required');
+      return;
+    }
+    setError(null);
+    setEmail('');
+    // Optionally alert or toast success here
+  };
+
   return (
     <footer className="bg-slate-900 text-slate-300 py-20 lg:py-24 border-t border-white/5">
       <div className="container mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-20 text-center md:text-left">
@@ -68,10 +81,19 @@ const Footer = () => {
           <div className="flex flex-col gap-3 font-sans">
             <input
               type="email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                if (error) setError(null);
+              }}
               placeholder="Your Email"
               className="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-gold-500 transition-colors"
             />
-            <button className="bg-gold-500 text-charcoal-900 font-bold uppercase tracking-widest text-xs py-3 rounded-lg hover:bg-amber-400 transition-colors">
+            {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+            <button 
+              onClick={handleSubscribe}
+              className="bg-gold-500 text-charcoal-900 font-bold uppercase tracking-widest text-xs py-3 rounded-lg hover:bg-amber-400 transition-colors"
+            >
               Subscribe Now
             </button>
           </div>

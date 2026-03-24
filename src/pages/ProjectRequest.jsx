@@ -23,18 +23,46 @@ const ProjectRequest = () => {
       ventilation: '',
       dishwasher: ''
     },
-    files: []
+    files: [],
+    additionalInfo: ''
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({});
 
-  const nextStep = () => setStep(prev => Math.min(prev + 1, 5));
+  const nextStep = () => {
+    const errors = {};
+    if (step === 1) {
+      if (!formData.name.trim()) errors.name = 'This field is required';
+      if (!formData.email.trim()) errors.email = 'This field is required';
+      if (!formData.phone.trim()) errors.phone = 'This field is required';
+    } else if (step === 2) {
+      if (!formData.cabinetry.brand.trim()) errors.brand = 'This field is required';
+      if (!formData.cabinetry.doorStyle.trim()) errors.doorStyle = 'This field is required';
+      if (!formData.cabinetry.ceilingHeight.trim()) errors.ceilingHeight = 'This field is required';
+      if (!formData.cabinetry.wallCabinetHeight.trim()) errors.wallCabinetHeight = 'This field is required';
+    } else if (step === 3) {
+      if (!formData.appliances.refrigerator.trim()) errors.refrigerator = 'This field is required';
+      if (!formData.appliances.range.trim()) errors.range = 'This field is required';
+      if (!formData.appliances.ventilation.trim()) errors.ventilation = 'This field is required';
+      if (!formData.appliances.dishwasher.trim()) errors.dishwasher = 'This field is required';
+    }
+
+    if (Object.keys(errors).length > 0) {
+      setValidationErrors(errors);
+      return;
+    }
+    setValidationErrors({});
+    setStep(prev => Math.min(prev + 1, 5));
+  };
+
   const prevStep = () => setStep(prev => Math.max(prev - 1, 1));
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
+    if (validationErrors[name]) setValidationErrors(prev => ({ ...prev, [name]: null }));
   };
 
   const handleCabinetryChange = (e) => {
@@ -43,6 +71,7 @@ const ProjectRequest = () => {
       ...prev,
       cabinetry: { ...prev.cabinetry, [name]: value }
     }));
+    if (validationErrors[name]) setValidationErrors(prev => ({ ...prev, [name]: null }));
   };
 
   const handleApplianceChange = (e) => {
@@ -51,6 +80,7 @@ const ProjectRequest = () => {
       ...prev,
       appliances: { ...prev.appliances, [name]: value }
     }));
+    if (validationErrors[name]) setValidationErrors(prev => ({ ...prev, [name]: null }));
   };
 
   const handleFileChange = (e) => {
@@ -67,6 +97,11 @@ const ProjectRequest = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.files.length === 0) {
+      setError('Please upload at least one file. This field is required');
+      return;
+    }
+
     setIsSubmitting(true);
     setError(null);
 
@@ -86,6 +121,7 @@ const ProjectRequest = () => {
     data.append('rangeCooktop', formData.appliances.range);
     data.append('ventilationHood', formData.appliances.ventilation);
     data.append('dishwasher', formData.appliances.dishwasher);
+    data.append('additionalInfo', formData.additionalInfo);
     
     formData.files.forEach(file => {
       data.append('files', file);
@@ -121,7 +157,8 @@ const ProjectRequest = () => {
           ventilation: '',
           dishwasher: ''
         },
-        files: []
+        files: [],
+        additionalInfo: ''
       });
 
       setStep(5); // Success step
@@ -179,16 +216,19 @@ const ProjectRequest = () => {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Full Name</label>
                     <input type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:border-transparent transition-all" placeholder="John Doe" />
+                    {validationErrors.name && <p className="text-red-500 text-xs mt-1">{validationErrors.name}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Email Address</label>
                     <input type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:border-transparent transition-all" placeholder="john@example.com" />
+                    {validationErrors.email && <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>}
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Phone Number</label>
                   <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:border-transparent transition-all" placeholder="(555) 123-4567" />
+                  {validationErrors.phone && <p className="text-red-500 text-xs mt-1">{validationErrors.phone}</p>}
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
@@ -233,18 +273,22 @@ const ProjectRequest = () => {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Cabinetry Brand</label>
                     <input type="text" name="brand" value={formData.cabinetry.brand} onChange={handleCabinetryChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-colors" placeholder="e.g. KraftMaid, Omega" />
+                    {validationErrors.brand && <p className="text-red-500 text-xs mt-1">{validationErrors.brand}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Door Style & Finish</label>
                     <input type="text" name="doorStyle" value={formData.cabinetry.doorStyle} onChange={handleCabinetryChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-colors" placeholder="e.g. Shaker White / Inset Navy" />
+                    {validationErrors.doorStyle && <p className="text-red-500 text-xs mt-1">{validationErrors.doorStyle}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Ceiling Height</label>
                     <input type="text" name="ceilingHeight" value={formData.cabinetry.ceilingHeight} onChange={handleCabinetryChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-colors" placeholder="e.g. 8', 9', 10'" />
+                    {validationErrors.ceilingHeight && <p className="text-red-500 text-xs mt-1">{validationErrors.ceilingHeight}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Wall Cabinet Height</label>
                     <input type="text" name="wallCabinetHeight" value={formData.cabinetry.wallCabinetHeight} onChange={handleCabinetryChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition-colors" placeholder="e.g. 30'', 36'', 42'' / Double Stack" />
+                    {validationErrors.wallCabinetHeight && <p className="text-red-500 text-xs mt-1">{validationErrors.wallCabinetHeight}</p>}
                   </div>
                 </div>
 
@@ -275,18 +319,22 @@ const ProjectRequest = () => {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Refrigerator (Size/Type)</label>
                     <input type="text" name="refrigerator" value={formData.appliances.refrigerator} onChange={handleApplianceChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 transition-colors" placeholder="e.g. 36'' French Door Sub-Zero" />
+                    {validationErrors.refrigerator && <p className="text-red-500 text-xs mt-1">{validationErrors.refrigerator}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Range / Cooktop</label>
                     <input type="text" name="range" value={formData.appliances.range} onChange={handleApplianceChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 transition-colors" placeholder="e.g. 48'' Dual Fuel Wolf Range" />
+                    {validationErrors.range && <p className="text-red-500 text-xs mt-1">{validationErrors.range}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Ventilation / Hood</label>
                     <input type="text" name="ventilation" value={formData.appliances.ventilation} onChange={handleApplianceChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 transition-colors" placeholder="e.g. 48'' Pro Wall Hood" />
+                    {validationErrors.ventilation && <p className="text-red-500 text-xs mt-1">{validationErrors.ventilation}</p>}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Dishwasher</label>
                     <input type="text" name="dishwasher" value={formData.appliances.dishwasher} onChange={handleApplianceChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 transition-colors" placeholder="e.g. 24'' Panel Ready Miele" />
+                    {validationErrors.dishwasher && <p className="text-red-500 text-xs mt-1">{validationErrors.dishwasher}</p>}
                   </div>
                 </div>
 
@@ -313,41 +361,55 @@ const ProjectRequest = () => {
                 <h3 className="text-2xl font-display font-bold text-slate-800 dark:text-white mb-6 transition-colors font-serif italic">Upload Floor Plans & PDF Exports</h3>
                 <p className="text-sm text-slate-500 dark:text-slate-400 mb-6 transition-colors">Upload your 2020 Design initial layouts, architectural blueprints, or hand-drawn measurements.</p>
 
-                <label 
-                  htmlFor="file-upload"
-                  className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-12 flex flex-col items-center justify-center text-center bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group"
-                >
-                  <div className="w-16 h-16 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
-                    <UploadCloud className="text-amber-600 dark:text-amber-400" size={32} />
-                  </div>
-                  <h4 className="text-lg font-medium text-slate-800 dark:text-white mb-2 transition-colors">Click to upload or drag and drop</h4>
-                  <p className="text-sm text-slate-500 dark:text-slate-400 transition-colors">Any file format allowed (PDF, JPG, PNG, DWG, etc. up to 50MB)</p>
-                  <input 
-                    id="file-upload"
-                    type="file" 
-                    className="hidden" 
-                    multiple 
-                    onChange={handleFileChange}
-                    accept="*" 
-                  />
-                </label>
+                <div className="pb-4">
+                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Additional Information</label>
+                  <textarea 
+                    name="additionalInfo"
+                    rows={4}
+                    value={formData.additionalInfo}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:border-transparent transition-all resize-none" 
+                    placeholder="Any specific instructions, style preferences, or details we should know about?" 
+                  ></textarea>
+                </div>
 
-                {formData.files.length > 0 && (
-                  <div className="space-y-2 mt-4">
-                    {formData.files.map((file, idx) => (
-                      <div key={idx} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-sm transition-colors">
-                        <span className="truncate max-w-[200px] text-slate-600 dark:text-slate-300">{file.name}</span>
-                        <button onClick={() => removeFile(idx)} className="text-red-500 hover:text-red-700 transition-colors">Remove</button>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800">
+                  <label 
+                    htmlFor="file-upload"
+                    className="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-2xl p-12 flex flex-col items-center justify-center text-center bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer group"
+                  >
+                    <div className="w-16 h-16 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                      <UploadCloud className="text-amber-600 dark:text-amber-400" size={32} />
+                    </div>
+                    <h4 className="text-lg font-medium text-slate-800 dark:text-white mb-2 transition-colors">Click to upload or drag and drop</h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400 transition-colors">Any file format allowed (PDF, JPG, PNG, DWG, etc. up to 50MB)</p>
+                    <input 
+                      id="file-upload"
+                      type="file" 
+                      className="hidden" 
+                      multiple 
+                      onChange={handleFileChange}
+                      accept="*" 
+                    />
+                  </label>
 
-                {error && (
-                  <p className="text-red-500 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-100 dark:border-red-900/30">
-                    {error}
-                  </p>
-                )}
+                  {formData.files.length > 0 && (
+                    <div className="space-y-2 mt-4">
+                      {formData.files.map((file, idx) => (
+                        <div key={idx} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-xl text-sm transition-colors">
+                          <span className="truncate max-w-[200px] text-slate-600 dark:text-slate-300">{file.name}</span>
+                          <button onClick={() => removeFile(idx)} className="text-red-500 hover:text-red-700 transition-colors">Remove</button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  {error && (
+                    <p className="text-red-500 text-sm bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-100 dark:border-red-900/30 mt-4">
+                      {error}
+                    </p>
+                  )}
+                </div>
 
                 <div className="pt-6 flex justify-between">
                   <button onClick={prevStep} className="text-slate-500 px-6 py-3 rounded-full font-medium hover:text-slate-800 transition-colors flex items-center gap-2">

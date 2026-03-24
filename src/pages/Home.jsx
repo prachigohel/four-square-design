@@ -91,22 +91,22 @@ const Home = () => {
         <div className="container mx-auto px-6 lg:px-12">
           <p className="text-center text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-12">Elevating Professionals Through Exclusive Cabinetry Brand Catalogs</p>
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
-            <div className="bg-white p-2 rounded-md shadow-sm h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
               <img src="/karftmaid.jpg" alt="KraftMaid" className="h-full w-auto object-contain" />
             </div>
-            <div className="bg-white p-2 rounded-md shadow-sm h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
               <img src="/medallion.jpg" alt="Medallion" className="h-full w-auto object-contain" />
             </div>
-            <div className="bg-white p-2 rounded-md shadow-sm h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
               <img src="/merillat%20cabinetry.jpg" alt="Merillat" className="h-full w-auto object-contain" />
             </div>
-            <div className="bg-white p-2 rounded-md shadow-sm h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
               <img src="/cnccabinetry.jpg" alt="CNC Cabinetry" className="h-full w-auto object-contain" />
             </div>
-            <div className="bg-white p-2 rounded-md shadow-sm h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
               <img src="/bellmont-cabinet-co.png" alt="Bellmont" className="h-full w-auto object-contain" />
             </div>
-            <div className="bg-white p-2 rounded-md shadow-sm h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
               <img src="/uscabinetdepot.jpg" alt="US Cabinet Depot" className="h-full w-auto object-contain" />
             </div>
           </div>
@@ -136,21 +136,21 @@ const Home = () => {
       <section className="py-24 bg-white dark:bg-slate-800 border-y border-charcoal-100 dark:border-white/5 transition-colors duration-300">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.h2 {...fadeInUp} className="text-3xl md:text-4xl font-sans font-bold text-slate-800 dark:text-white text-center mb-16 lg:mb-24 uppercase tracking-[0.2em]">
-            Spatial Planning : <span className="text-amber-500">Estimation</span>
+            Our <span className="text-amber-500">Expertise</span>
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-0 lg:divide-x divide-slate-200 dark:divide-white/10">
             {[
               {
                 title: "SOFTWARES",
-                items: ["2020 Design (Expert)", "AutoCAD", "SketchUp", "Cohoom", "Adobe Photoshop"]
+                items: ["2020 Design (Expert)", "AutoCAD", "SketchUp", "Cohoom", "Microsoft Office"]
               },
               {
                 title: "SPATIAL PLANNING",
-                items: ["US-Standard K&B Planning", "NKBA & ADA Standards", "Residential & Multi-Family", "Traffic Flow & Zoning"]
+                items: ["US-Standard K&B Planning", "NKBA & ADA Standards", "Residential & Multi-Family", "Estimation"]
               },
               {
                 title: "VISUALIZATION",
-                items: ["High-Quality 3D Rendering", "Panorama 360° Views", "Elevations & Perspective", "Manufacturer Integration"]
+                items: ["High-Quality 3D Rendering", "Panorama 360° Views", "Elevations & Perspective"]
               },
               {
                 title: "COMMUNICATION",
@@ -269,12 +269,6 @@ const Home = () => {
               >
                 Start Your Design
               </Link>
-              <a
-                href="https://wa.me/7600134301"
-                className="bg-white text-slate-900 px-12 py-5 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-slate-100 transition-all"
-              >
-                Instant WhatsApp
-              </a>
             </div>
           </motion.div>
         </div>
