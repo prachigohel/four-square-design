@@ -8,7 +8,7 @@ const Pricing = () => {
     {
       name: "KITCHEN",
       subtitle: "Plan for Single Kitchen Design",
-      price: "25",
+      price: "24.99",
       unit: "PER DESIGN",
       buttonText: "GET STARTED",
       features: [
@@ -22,9 +22,9 @@ const Pricing = () => {
       recommended: false,
     },
     {
-      name: "Full Home",
+      name: "Full House",
       subtitle: "Includes Kitchen + 3 Areas",
-      price: "45",
+      price: "49.99",
       unit: "PER DESIGN",
       buttonText: "GET STARTED",
       features: [
@@ -37,12 +37,12 @@ const Pricing = () => {
         "Kitchenette",
         "Pantry"
       ],
-      recommended: true,
+      recommended: false,
     },
     {
-      name: "Full Home+",
+      name: "Full House+",
       subtitle: "Includes Kitchen + 5 Areas",
-      price: "65",
+      price: "69.99",
       unit: "PER DESIGN",
       buttonText: "GET STARTED",
       features: [
@@ -56,6 +56,22 @@ const Pricing = () => {
         "Pantry"
       ],
       recommended: false,
+    },
+    {
+      name: "Retainer",
+      subtitle: "Enjoy kitchen designs as low as $19 per design",
+      price: "1199",
+      unit: "PER MONTH",
+      buttonText: "GET STARTED",
+      features: [
+        "All in Full House Plan plus",
+        "Dedicated Design Expert",
+        "65 Designs a Month",
+        "Instant Design Assistance",
+        "Quote Creation",
+        "Personalized Design Packets"
+      ],
+      recommended: true,
     }
   ];
 
@@ -86,7 +102,7 @@ const Pricing = () => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 max-w-7xl mx-auto items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6 max-w-[90rem] mx-auto items-stretch">
           {plans.map((plan, index) => (
             <motion.div
               key={index}
@@ -101,7 +117,7 @@ const Pricing = () => {
             >
               {plan.recommended && (
                 <div className="absolute top-0 inset-x-0 bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 text-slate-900 text-[10px] font-black uppercase tracking-[0.4em] py-2.5 text-center shadow-md">
-                  Most Popular
+                  Recommended
                 </div>
               )}
 

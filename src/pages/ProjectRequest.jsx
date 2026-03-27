@@ -235,9 +235,10 @@ const ProjectRequest = () => {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2 transition-colors">Project Type</label>
                     <select name="projectType" value={formData.projectType} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:border-transparent appearance-none bg-white dark:bg-slate-800 dark:text-white transition-colors">
-                      <option value="kitchen-bath">Kitchen and Bath</option>
+                      <option value="kitchen-bath">Kitchen</option>
+                      <option value="kitchen-bath">Kitchen & Bath</option>
                       <option value="full-house">Full House</option>
-                      <option value="full-house-plus">Full house +</option>
+                      <option value="full-house-plus">Full House +</option>
                     </select>
                   </div>
                   <div>
@@ -245,6 +246,7 @@ const ProjectRequest = () => {
                     <select name="newConstruction" value={formData.newConstruction} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-fawn-400 focus:border-transparent appearance-none bg-white dark:bg-slate-800 dark:text-white transition-colors">
                       <option value="remodel">Remodel / Renovation</option>
                       <option value="new">New Construction</option>
+                      <option value="new">Multi Family</option>
                     </select>
                   </div>
                 </div>

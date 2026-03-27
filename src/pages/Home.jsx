@@ -92,23 +92,33 @@ const Home = () => {
           <p className="text-center text-[10px] font-black text-slate-500 uppercase tracking-[0.4em] mb-12">Elevating Professionals Through Exclusive Cabinetry Brand Catalogs</p>
           <div className="flex flex-wrap justify-center items-center gap-10 md:gap-16">
             <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
-              <img src="/karftmaid.jpg" alt="KraftMaid" className="h-full w-auto object-contain" />
+              <img src="/Kraftmaid-Logo-Vector.svg-.png" alt="KraftMaid" className="h-full w-auto object-contain" />
             </div>
             <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
-              <img src="/medallion.jpg" alt="Medallion" className="h-full w-auto object-contain" />
+              <img src="/MD_Logo_CMYK_LG.png" alt="Medallion" className="h-full w-auto object-contain" />
             </div>
             <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
-              <img src="/merillat%20cabinetry.jpg" alt="Merillat" className="h-full w-auto object-contain" />
+              <img src="/Merillat_Logo.svg" alt="Merillat" className="h-full w-auto object-contain" />
             </div>
             <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
-              <img src="/cnccabinetry.jpg" alt="CNC Cabinetry" className="h-full w-auto object-contain" />
+              <img src="/cnc_logo.png" alt="CNC Cabinetry" className="h-full w-auto object-contain" />
             </div>
             <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
-              <img src="/bellmont-cabinet-co.png" alt="Bellmont" className="h-full w-auto object-contain" />
+              <img src="/Bellmont-Logo.png" alt="Bellmont" className="h-full w-auto object-contain" />
             </div>
             <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
-              <img src="/uscabinetdepot.jpg" alt="US Cabinet Depot" className="h-full w-auto object-contain" />
+              <img src="/2016_smartLogo-500x198_slider.png" alt="smart cabinate" className="h-full w-auto object-contain" />
             </div>
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+              <img src="/yorktowne-cabinetry-logo.png" alt="yorktowne cabinetry" className="h-full w-auto object-contain" />
+            </div>
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+              <img src="/nmwLargeLogo.png" alt="febuwood" className="h-full w-auto object-contain" />
+            </div>
+            <div className="h-12 md:h-14 flex items-center justify-center transition-transform hover:scale-105">
+              <img src="/plain_fency.svg" alt="plain fency" className="h-full w-auto object-contain" />
+            </div>
+           
           </div>
         </div>
       </section>
