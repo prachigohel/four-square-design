@@ -6,25 +6,25 @@ import PanoramaViewer from '../components/ui/PanoramaViewer';
 const projects = [
   {
     id: 1,
-    title: "Signature Culinary Suite",
+    title: "Gourmet Living Kitchen",
     category: "Residential",
-    image: "/image_1.jpeg",
-    doorStyle: "Shaker Slab",
-    finish: "Matte White & Natural Oak"
+    image: "/image_1.png",
+    doorStyle: "Inset Slim Shaker",
+    finish: "Warm-Off White & Deep Navy"
   },
   {
     id: 2,
-    title: "Luxury Loft Kitchen",
+    title: "Modern Luxe Bathroom",
     category: "Multi-Family",
-    image: "/image_2.jpeg",
-    doorStyle: "Flat Panel",
-    finish: "High Gloss Fawn"
+    image: "/image_2.png",
+    doorStyle: "Brooklyn",
+    finish: "White"
   },
   {
     id: 3,
     title: "Monochrome Wellness Bath",
     category: "Residential",
-    image: "/image_3.jpeg",
+    image: "/image_3.png",
     doorStyle: "Raised Panel",
     finish: "Slate Gray Painted"
   },
@@ -33,8 +33,8 @@ const projects = [
     title: "Urban Industrial Kitchen",
     category: "Multi-Family",
     image: "/image_4.jpeg",
-    doorStyle: "Integrated Handle",
-    finish: "Charcoal & Walnut"
+    doorStyle: "Classic Slim Shaker",
+    finish: "Midnight Blue"
   },
   {
     id: 5,
@@ -48,7 +48,7 @@ const projects = [
     id: 6,
     title: "Boutique Hotel Layouts",
     category: "Multi-Family",
-    image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=2070&auto=format&fit=crop",
+    image: "/image_6.jpeg",
     doorStyle: "Slab Veneer",
     finish: "Rift Cut White Oak"
   }
